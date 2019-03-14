@@ -7,8 +7,24 @@
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#0094ff",
-    "navigationBarTitleText": "全局-首页",
-    "navigationBarTextStyle":"white",
-    "enablePullDownRefresh":true
+    "navigationBarTitleText": "首页",
+    "navigationBarTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#000",
+    "list": [
+      {
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "icons/lemon.png",
+      "selectedIconPath": "icons/beer.png"
+    },
+    {
+      "pagePath": "pages/logs/logs",
+      "text": "日志",
+      "iconPath": "icons/cake.png",
+      "selectedIconPath": "icons/pizza.png"
+    }
+    ]
   }
 }
