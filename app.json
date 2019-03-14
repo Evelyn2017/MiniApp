@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/index2/index2"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#0094ff",
+    "navigationBarTitleText": "全局-首页",
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh":true
+  }
+}
