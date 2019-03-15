@@ -1,8 +1,13 @@
 {
   "pages":[
+    "pages/index5/index5",
+    "pages/index4/index4",
+    "pages/index3/index3",
+    "pages/index2/index2",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/index2/index2"
+    "pages/logs/logs"
+   
+    
   ],
   "window":{
     "backgroundTextStyle":"dark",

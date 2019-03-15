@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "index2",
+  "navigationBarBackgroundColor": "#00b26a",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#00b26a",
+  "enablePullDownRefresh": true
 }
