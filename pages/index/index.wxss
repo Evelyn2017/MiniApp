@@ -1,21 +1,24 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.temp{
+  text-align: center;
+  font-size: 200rpx;
+  opacity: 0.8;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.weather{
+  text-align: center;
+  font-size: 40prx;
+  line-height: 56rpx;
+  opacity: 0.65;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.weather-wrapper{
+  position: relative;
+  padding-top: 174rpx;
+  padding-bottom: 250rpx;
 }
-
-.usermotto {
-  margin-top: 200px;
+.weather-bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }

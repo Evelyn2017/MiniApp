@@ -1,8 +1,0 @@
-<view>
-  hello world   ||   {{msg}}
-  <view>num: {{num}}</view>
-  <view>isBoy: {{isBoy}}</view>
-  <view>person: {{person.name}}---- person.height{{person.height}}</view>
-  <view data-id="{{title}}">title</view>
-  <view> <checkbox checked="{{false}}"></checkbox> </view>
-</view>
