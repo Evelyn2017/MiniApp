@@ -4,7 +4,7 @@
   <image class="weather-bg" 
   src="{{nowWeatherBackground}}"
   mode="scaleToFill"></image>
-  <view class='day-weather'>
+  <view class='day-weather' bindtap='onTapDayWeather'>
     <view class='day-text'>{{todayDate}}</view>
     <view class='temp-text'>{{todayTemp}}</view>
     <image class='arrow-icon'

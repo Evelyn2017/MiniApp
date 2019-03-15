@@ -14,6 +14,8 @@ const weatherColorMap = {
   'heavyrain':'#c5ccd0',
   'snow':'#aae1fc'
 }
+
+// page info
 Page({
   data: {
     nowTemp: 14,
@@ -23,14 +25,17 @@ Page({
     todayTemp:"",
     todayDate:""
   },
+
   onPullDownRefresh(){
     this.getNow(()=>{
       wx.stopPullDownRefresh()
     })
   },
+
   onLoad(){
     this.getNow()
   },
+
   getNow(callback){
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
@@ -49,6 +54,7 @@ Page({
       } 
     })
   },
+
   //set now weather
   setNow(result){
     let temp = result.now.temp
@@ -67,6 +73,7 @@ Page({
     })
 
   },
+
   // set forecast
   setHourlyWeather(result){
     let forecast = result.forecast
@@ -84,11 +91,22 @@ Page({
       hourlyWeather: hourlyWeather
     })
   },
+  
+  //set today info
   setToday(result){
     let date = new Date()
     this.setData({
       todayTemp: `${result.today.minTemp}˚ - ${result.today.maxTemp}˚`,
       todayDate: `${date.getFullYear()} - ${date.getMonth() + 1} - ${date.getDate()} 今天`
     })
+  },
+  
+  //button 
+  onTapDayWeather(){
+    // wx.showToast()
+    wx.navigateTo({
+      url: '/pages/list/list',
+    })
   }
+  
 })
