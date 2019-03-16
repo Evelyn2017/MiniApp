@@ -15,15 +15,34 @@ const weatherColorMap = {
   'snow':'#aae1fc'
 }
 
+const QQMapWX = require('../../libs/qqmap-wx-jssdk1/qqmap-wx-jssdk.js')
+const UNPROMPTED = 0
+const UNAUTHROIZED = 1
+const AUTHORIZED = 2
+
+const UNPROMOPTED_TIPS = '点击获取当前位置'
+const UNAUTHORIZED_TIPS = '点击开启位置权限'
+const AUTHORIZED_TIPS = ''
+
 // page info
 Page({
   data: {
-    nowTemp: 14,
-    nowWeather: "多云",
+    nowTemp: '',
+    nowWeather: "",
     nowWeatherBackground: '',
     forecast:[],
     todayTemp:"",
-    todayDate:""
+    todayDate:"",
+    city:"广州市",
+    locationAuthType: UNPROMPTED,
+    locationTipsText: UNPROMOPTED_TIPS
+  },
+
+  onLoad() {
+    this.qqmapsdk = new QQMapWX({
+      key: 'TLXBZ-7NLW6-4NTSA-ECRJQ-VPOCE-GHBFI'
+    })
+    this.getNow()
   },
 
   onPullDownRefresh(){
@@ -32,15 +51,11 @@ Page({
     })
   },
 
-  onLoad(){
-    this.getNow()
-  },
-
   getNow(callback){
     wx.request({
       url: 'https://test-miniprogram.com/api/weather/now',
       data:{
-        city: " 天津市"
+        city: this.data.city
       },
       success: res=> {
         console.log(res)
@@ -101,12 +116,50 @@ Page({
     })
   },
   
-  //button 
+  //button
   onTapDayWeather(){
     // wx.showToast()
     wx.navigateTo({
-      url: '/pages/list/list',
+      url: '/pages/list/list?city=' + this.data.city,
     })
-  }
+  },
   
+  // get location
+  onTapLocation(){
+    if(this.data.locationAuthType === UNAUTHROIZED)
+      wx.openSetting()
+    else
+    this.getLocation()
+  },
+
+  getLocation(){
+    wx.getLocation({
+      success: res =>{
+        this.setData({
+          locationAuthType: AUTHORIZED,
+          locationTipsText: AUTHORIZED_TIPS
+        })
+        this.qqmapsdk.reverseGeocoder({
+          location:{
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: res => {
+            let city = res.result.address_component.city
+            this.setData({
+              city: city,
+              locationTipsText: ""
+            })
+            this.getNow()
+          }
+        })
+      },
+      fail: () => {
+        this.setData({
+          locationAuthType : UNAUTHROIZED,
+          locationTipsText: UNAUTHORIZED_TIPS
+        })
+      }
+    }) 
+  }
 })
