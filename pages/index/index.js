@@ -45,6 +45,23 @@ Page({
     this.getNow()
   },
 
+  onShow(){
+    wx.getSetting({
+      success: res => {
+        let auth = res.authSetting['scope.userLocation']
+        console.log(auth)
+        //grant location authroization
+        if (auth && this.data.locationAuthType !== AUTHORIZED){
+          this.setData({
+            locationAuthType : AUTHORIZED,
+            locationTipsText : AUTHORIZED_TIPS
+          })
+          this.getLocation()
+        }
+      }
+    })
+  },
+
   onPullDownRefresh(){
     this.getNow(()=>{
       wx.stopPullDownRefresh()
@@ -131,7 +148,7 @@ Page({
     else
     this.getLocation()
   },
-
+// function seperate
   getLocation(){
     wx.getLocation({
       success: res =>{
