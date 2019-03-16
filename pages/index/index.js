@@ -20,10 +20,6 @@ const UNPROMPTED = 0
 const UNAUTHROIZED = 1
 const AUTHORIZED = 2
 
-const UNPROMOPTED_TIPS = '点击获取当前位置'
-const UNAUTHORIZED_TIPS = '点击开启位置权限'
-const AUTHORIZED_TIPS = ''
-
 // page info
 Page({
   data: {
@@ -34,8 +30,7 @@ Page({
     todayTemp:"",
     todayDate:"",
     city:"广州市",
-    locationAuthType: UNPROMPTED,
-    locationTipsText: UNPROMOPTED_TIPS
+    locationAuthType: UNPROMPTED
   },
 
   onLoad() {
@@ -46,8 +41,7 @@ Page({
       success: res=> {
         let auth = res.authSetting['scope.userLocation']
         this.setData({
-          locationAuthType : auth? AUTHORIZED: (auth === false)?UNAUTHROIZED:UNPROMPTED,
-          locationTipsText: auth? AUTHORIZED_TIPS: (auth === false)? UNAUTHORIZED_TIPS : UNPROMOPTED_TIPS
+          locationAuthType : auth? AUTHORIZED: (auth === false)?UNAUTHROIZED:UNPROMPTED
         })
         if(auth)
           this.getCityAndWeather()
@@ -156,8 +150,7 @@ Page({
     wx.getLocation({
       success: res =>{
         this.setData({
-          locationAuthType: AUTHORIZED,
-          locationTipsText: AUTHORIZED_TIPS
+          locationAuthType: AUTHORIZED
         })
         // console.log(locationTipsText+ "sss")
         this.qqmapsdk.reverseGeocoder({
@@ -177,8 +170,7 @@ Page({
       },
       fail: () => {
         this.setData({
-          locationAuthType : UNAUTHROIZED,
-          locationTipsText: UNAUTHORIZED_TIPS
+          locationAuthType : UNAUTHROIZED
         })
       }
     }) 
