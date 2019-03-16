@@ -42,6 +42,19 @@ Page({
     this.qqmapsdk = new QQMapWX({
       key: 'TLXBZ-7NLW6-4NTSA-ECRJQ-VPOCE-GHBFI'
     })
+    wx.getSetting({
+      success: res=> {
+        let auth = res.authSetting['scope.userLocation']
+        this.setData({
+          locationAuthType : auth? AUTHORIZED: (auth === false)?UNAUTHROIZED:UNPROMPTED,
+          locationTipsText: auth? AUTHORIZED_TIPS: (auth === false)? UNAUTHORIZED_TIPS : UNPROMOPTED_TIPS
+        })
+        if(auth)
+          this.getCityAndWeather()
+        else
+          this.getNow()
+      }
+    })
     this.getNow()
   },
 
@@ -131,21 +144,22 @@ Page({
         success : res => {
           let auth = res.authSetting['scope.userLocation']
           if(auth) {
-            this.getLocation()
+            this.getCityAndWeather()
           }
         }
       })
     else
-    this.getLocation()
+    this.getCityAndWeather()
   },
 
-  getLocation(){
+  getCityAndWeather(){
     wx.getLocation({
       success: res =>{
         this.setData({
           locationAuthType: AUTHORIZED,
           locationTipsText: AUTHORIZED_TIPS
         })
+        // console.log(locationTipsText+ "sss")
         this.qqmapsdk.reverseGeocoder({
           location:{
             latitude: res.latitude,
