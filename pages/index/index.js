@@ -61,8 +61,7 @@ Page({
         //grant location authroization
         if (auth && this.data.locationAuthType !== AUTHORIZED){
           this.setData({
-            locationAuthType : AUTHORIZED,
-            locationTipsText : AUTHORIZED_TIPS
+            locationAuthType : AUTHORIZED
           })
           this.getLocation()
         }
