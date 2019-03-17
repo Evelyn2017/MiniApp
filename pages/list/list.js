@@ -2,14 +2,13 @@ const dayMap = ['星期日', '星期一', '星期二', '星期三', '星期四',
 
 Page({
   data: {
-    weekWeather: [1,2,3,4,5,6,7],
-    city: "广州市"
+    weekWeather: []
   },
   onLoad(options){
     this.setData({
-      city: this.options.city
+      city: options.city
     })
-    console.log(options.city)
+    // console.log(options.city)
     this.getWeekWeather()
   },
   onPullDownRefresh(){
@@ -46,7 +45,7 @@ Page({
         iconPath: '/icons/' + result[i].weather + '-icon.png'
       })
     }
-    weekWeather[0] = "今天"
+    weekWeather[0].day = "今天"
     this.setData({
       weekWeather
     })

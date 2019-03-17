@@ -26,17 +26,18 @@ Page({
     nowTemp: '',
     nowWeather: "",
     nowWeatherBackground: '',
-    forecast:[],
+    hourlyWeather: [],
     todayTemp:"",
     todayDate:"",
-    city:"广州市",
-    locationAuthType: UNPROMPTED
+    city: "广州",
+    locationAuthType: UNPROMPTED,
+    newApiTest: ""
   },
 
   onLoad() {
     this.qqmapsdk = new QQMapWX({
       key: 'TLXBZ-7NLW6-4NTSA-ECRJQ-VPOCE-GHBFI'
-    })
+    }),
     wx.getSetting({
       success: res=> {
         let auth = res.authSetting['scope.userLocation']
@@ -48,8 +49,9 @@ Page({
         else
           this.getNow()
       }
-    })
-    this.getNow()
+    }),
+    this.getNow(),
+    this.getNewApi()
   },
 
   onPullDownRefresh(){
@@ -65,7 +67,6 @@ Page({
         city: this.data.city
       },
       success: res=> {
-        console.log(res)
         let result = res.data.result
         this.setNow(result)
         this.setHourlyWeather(result)
@@ -77,11 +78,27 @@ Page({
     })
   },
 
+  getNewApi(callback){
+    wx.request({
+      url: 'https://api.seniverse.com/v3/weather/now.json?key=tqvagvq79mvnsh2g&language=zh-Hans&unit=c',
+      data: {
+        location: this.data.city
+      },
+      success: res =>{
+        let result = res.data.results[0].now
+        console.log(result)
+      },
+      complete: ()=> {
+        callback && callback()
+      }
+    })
+  },
+
   //set now weather
   setNow(result){
     let temp = result.now.temp
     let weather = result.now.weather
-    console.log(temp, weather)
+    // console.log(temp, weather)
     // this.data.nowTemp = temp         禁止
     // this.data.nowWeather = nowWeather
     this.setData({
@@ -152,7 +169,6 @@ Page({
         this.setData({
           locationAuthType: AUTHORIZED
         })
-        // console.log(locationTipsText+ "sss")
         this.qqmapsdk.reverseGeocoder({
           location:{
             latitude: res.latitude,
