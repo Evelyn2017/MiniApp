@@ -29,7 +29,7 @@ Page({
     hourlyWeather: [],
     todayTemp:"",
     todayDate:"",
-    city: "广州",
+    city: "北京",
     locationAuthType: UNPROMPTED,
     newApiTest: ""
   },
@@ -77,7 +77,9 @@ Page({
       } 
     })
   },
-
+  
+  //real weather infomation
+  //TODO: change 
   getNewApi(callback){
     wx.request({
       url: 'https://api.seniverse.com/v3/weather/now.json?key=tqvagvq79mvnsh2g&language=zh-Hans&unit=c',
@@ -98,7 +100,6 @@ Page({
   setNow(result){
     let temp = result.now.temp
     let weather = result.now.weather
-    // console.log(temp, weather)
     // this.data.nowTemp = temp         禁止
     // this.data.nowWeather = nowWeather
     this.setData({
