@@ -58,7 +58,6 @@ Page({
     wx.getSetting({
       success: res => {
         let auth = res.authSetting['scope.userLocation']
-        console.log(auth)
         //grant location authroization
         if (auth && this.data.locationAuthType !== AUTHORIZED){
           this.setData({
