@@ -63,7 +63,7 @@ Page({
           this.setData({
             locationAuthType : AUTHORIZED
           })
-          this.getLocation()
+          this.getCityAndWeather()
         }
       }
     })
