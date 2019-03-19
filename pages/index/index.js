@@ -31,7 +31,7 @@ Page({
     todayDate:"",
     city: "天津",
     locationAuthType: UNPROMPTED,
-    newApiTest: ""
+    // newApiTest: ""
   },
 
   onLoad() {
@@ -95,40 +95,39 @@ Page({
   
   //real weather infomation
   //TODO: change 
-  getNewApi(callback){
-    wx.request({
-      url: 'https://api.seniverse.com/v3/weather/now.json?language=zh-Hans&unit=c',
-      data: {
-        key: "tqvagvq79mvnsh2g",
-        location: this.data.city
-      },
-      success: res =>{
-        let result = res.data.results[0].now
-        console.log(result)
-      },
-      complete: ()=> {
-        callback && callback()
-      }
-    })
-  },
+  // getNewApi(callback){
+  //   wx.request({
+  //     url: 'https://api.seniverse.com/v3/weather/now.json?language=zh-Hans&unit=c',
+  //     data: {
+  //       key: "tqvagvq79mvnsh2g",
+  //       location: this.data.city
+  //     },
+  //     success: res =>{
+  //       let result = res.data.results[0].now
+  //       console.log(result)
+  //     },
+  //     complete: ()=> {
+  //       callback && callback()
+  //     }
+  //   })
+  // },
 
   // new API get hourly forecast
-  get24HourForecast(callback){
-    wx.request({
-      url: 'https://api.seniverse.com/v3/weather/hourly.json?key=tqvagvq79mvnsh2g&language=zh-Hans&unit=c&start=0&hours=24',
-      data: {
-          location: this.data.city
-      },
-
-      success: res=>{
-        let result = res.data
-        console.log(result.results[0])
-      },
-      complete:()=>{
-        callback && callback()
-      }
-    })
-  },
+  // get24HourForecast(callback){
+  //   wx.request({
+  //     url: 'https://api.seniverse.com/v3/weather/hourly.json?key=tqvagvq79mvnsh2g&language=zh-Hans&unit=c&start=0&hours=24',
+  //     data: {
+  //         location: this.data.city
+  //     },
+  //     success: res=>{
+  //       let result = res.data
+  //       console.log(result.results[0])
+  //     },
+  //     complete:()=>{
+  //       callback && callback()
+  //     }
+  //   })
+  // },
 
   //set now weather
   setNow(result){
