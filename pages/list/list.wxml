@@ -6,9 +6,3 @@
     <view class='temp'>{{item.temp}}</view>
     <image class='weather-icon' src='{{item.iconPath}}'></image>
 </view>
-
-<!-- <view class='day'>{{"星期一""}}</view>
-    <view class='date'>{{"2019-3-15"}}</view>
-  </view>
-  <view class='temp'>{{"2˚~7˚"}}</view>
-  <image class='weather-icon' src='/icons/sunny-icon.png'></image> -->
